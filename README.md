@@ -1,37 +1,51 @@
-## Welcome to GitHub Pages
+ 
 
-You can use the [editor on GitHub](https://github.com/amjunliang/page_test/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+[ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa) 17.5k Facebook
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+[KVOController](https://github.com/facebook/KVOController) 58k Facebook
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```objective-c
+[self.KVOController observe:self.fizz
+                    keyPath:@"number"
+                    options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                      block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString    *,id> * _Nonnull change) {
+                          NSLog(@"%@", change);
+                      }];
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+[THObserversAndBinders](https://github.com/th-in-gs/THObserversAndBinders) 639 个人
 
-### Jekyll Themes
+```objective-c
+//kvo
+[THObserver observerForObject:object
+                      keyPath:@"propertyToObserve"
+                      options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                  changeBlock:^(NSDictionary *change) {
+                      NSLog(@"propertyToObserve is %@", change[NSKeyValueChangeNewKey]);
+                  }];
+//绑定
+[THBinder binderFromObject:fromObject keyPath:@"fromKey"
+                  toObject:toObject keyPath:@"toKey"];
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/amjunliang/page_test/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+[THBinder binderFromObject:fromObject keyPath:@"fromKey"
+                                     toObject:toObject keyPath:@"toKey"
+                          transformationBlock:^id(id value) {
+                              return @([value integerValue] + 5);
+                          }];
+```
 
-### Support or Contact
+[RZDataBinding](https://github.com/Raizlabs/RZDataBinding) 345 个人
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+```objective-c
+    ///绑定模型的属性到ui
+[cell.textLabel rz_bindKey:RZDB_KP(UILabel, text) toKeyPath:RZDB_KP(RZUser, fullName) ofObject:user];
+    //绑定模型的属性到UI, 并且转化数据
+    [cell.imageView rz_bindKey:RZDB_KP(UIImageView, image) toKeyPath:RZDB_KP(RZUser, favoriteColorHex) ofObject:user withTransform:^id(id value) {
+        UIColor *color = [UIColor rz_hexColor:(uint32_t)[value integerValue]];
+        return [UIImage rz_imageWithColor:color size:CGSizeMake(35.0f, 35.0f)];
+    }];
+```
+
+
